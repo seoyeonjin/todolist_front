@@ -10,19 +10,30 @@
 </head>
 
 <body>
-    <div class="titile">
-        Todo List
-    </div>
-    <div class="input-info" id="input-info">
-        <input type="text" placeholder="할 일을 입력해주세요" id="input-value">
-        <button id="input-button">추가하기</button>
-    </div>
-    <div class="input-list" id="input-list">
-        <p id="count"></p>
-        <ul id="list" class="list">
-        </ul>
+    <div class="contents">
+        <h1 class="title">
+            Todo List
+        </h1>
+        <div class="current-info">
+            <div class="date">
+                <script>
+                    date = new Date().toLocaleDateString();
+                    document.write(date);
+                </script>
+            </div>
+            <div id="count" class="count"></div>
+        </div>
+        <div class="input-info" id="input-info">
+            <input type="text" placeholder="할 일을 입력해주세요" id="input-value">
+            <button id="input-button">추가하기</button>
+        </div>
+        <div class="input-list" id="input-list">
+            <ul id="list" class="list">
+            </ul>
+        </div>
     </div>
 </body>
+
 <script src="main.js"></script>
 
 </html>

@@ -1,0 +1,23 @@
+body {
+    padding: 0;
+    margin: 0;
+    /*background-color: #FFE8FC;*/
+}
+
+.contents {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.current-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.list {
+    padding: 0;
+}

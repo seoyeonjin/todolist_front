@@ -74,11 +74,11 @@ function deleteItem(event) {
 }
 
 function printCount(count) {
-    const count_p = document.getElementById("count");
+    const count_div = document.getElementById("count");
     if (count == 0) {
-        count_p.innerHTML = "남은 할 일이 없어요";
+        count_div.innerHTML = "남은 할 일이 없어요";
     }
     else {
-        count_p.innerHTML = "남은 할 일: " + count;
+        count_div.innerHTML = "남은 할 일: " + count;
     }
 }
