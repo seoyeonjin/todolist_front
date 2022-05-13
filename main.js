@@ -24,6 +24,7 @@ function addItem() {
 
         //input 값
         list_input.setAttribute('id', 'item');
+        list_input.setAttribute('name', 'name');
         list_input.setAttribute('value', inputValue.value);
 
         //삭제 버튼
@@ -41,19 +42,28 @@ function addItem() {
 
         list_button.addEventListener('click', deleteItem);
         list_check.addEventListener('click', checkItem);
-        list_input.addEventListener('keypress', updateItem);
+        list_input.addEventListener('click', updateItem);
         inputValue.value = '';
     }
 }
 
 function updateItem(event) {
-    if (event.code == "Enter") {
-        event.target.setAttribute('value', event.target.value);
-    }
+    original_name = event.target.value;
+    //console.log("original: " + original_name);
+
+    event.target.addEventListener('keypress', (event) => {
+        if (event.code == "Enter") {
+            console.log("original: " + original_name);
+            event.target.setAttribute('value', event.target.value);
+            original_name = event.target.value;
+            console.log(event.target.value);
+        }
+    })
 }
 
 function checkItem(event) {
     const checked = event.target.parentElement;
+    const original_name = event.target.nextSibling.value;
     if (event.target.checked) {
         checked.style.opacity = 0.4;
         count -= 1;
@@ -68,6 +78,7 @@ function checkItem(event) {
 
 function deleteItem(event) {
     const delete_item = event.target.parentElement;
+    const delete_value = event.target.value;
     delete_item.remove();
     count -= 1;
     printCount(count);
