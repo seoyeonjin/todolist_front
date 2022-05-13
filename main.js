@@ -2,6 +2,7 @@ const inputButton = document.getElementById('input-button');
 const inputValue = document.getElementById('input-value');
 const list = document.getElementById('list');
 let count = 0;
+printCount(count);
 
 inputButton.addEventListener('click', addItem);
 inputValue.addEventListener('keyup', (e) => {
@@ -24,7 +25,6 @@ function addItem() {
         //input 값
         list_input.setAttribute('id', 'item');
         list_input.setAttribute('value', inputValue.value);
-        //list_input.innerHTML = inputValue.value;
 
         //삭제 버튼
         list_button.setAttribute('id', 'delete-button');
@@ -35,7 +35,7 @@ function addItem() {
         list_div.appendChild(list_button);
 
         count += 1;
-        console.log(count);
+        printCount(count);
 
         list.appendChild(list_div);
 
@@ -57,11 +57,11 @@ function checkItem(event) {
     if (event.target.checked) {
         checked.style.opacity = 0.4;
         count -= 1;
-        console.log(count);
+        printCount(count);
     } else {
         checked.style.opacity = 1;
         count += 1;
-        console.log(count);
+        printCount(count);
     }
 
 }
@@ -70,5 +70,15 @@ function deleteItem(event) {
     const delete_item = event.target.parentElement;
     delete_item.remove();
     count -= 1;
-    console.log(count);
+    printCount(count);
+}
+
+function printCount(count) {
+    const count_p = document.getElementById("count");
+    if (count == 0) {
+        count_p.innerHTML = "남은 할 일이 없어요";
+    }
+    else {
+        count_p.innerHTML = "남은 할 일: " + count;
+    }
 }
