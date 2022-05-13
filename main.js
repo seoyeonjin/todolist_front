@@ -1,6 +1,7 @@
 const inputButton = document.getElementById('input-button');
 const inputValue = document.getElementById('input-value');
 const list = document.getElementById('list');
+let count = 0;
 
 inputButton.addEventListener('click', addItem);
 inputValue.addEventListener('keyup', (e) => {
@@ -9,30 +10,36 @@ inputValue.addEventListener('keyup', (e) => {
     }
 })
 
-
-
 function addItem() {
     if (inputValue.value != '') {
+        const list_check = document.createElement('input');
         const list_input = document.createElement('input');
         const list_div = document.createElement('div');
-
-        //list_input.setAttribute('class', 'item');
-        list_input.setAttribute('id', 'item');
-        //list_input.setAttribute('type', 'text');
-        list_input.setAttribute('value', inputValue.value);
-        //list_input.setAttribute('placeholder', inputValue.value);
         const list_button = document.createElement('button');
-        list_input.innerHTML = inputValue.value;
-        list_button.setAttribute('id', 'delete-button');
-        list_button.innerHTML = '❌'
 
-        //list_input.innerHTML += "<button id='delete-button'></button>"; //onclick='deleteItem()'
+        //check box
+        list_check.setAttribute('type', 'checkbox');
+        list_check.setAttribute('id', 'check-input');
+
+        //input 값
+        list_input.setAttribute('id', 'item');
+        list_input.setAttribute('value', inputValue.value);
+        list_input.innerHTML = inputValue.value;
+
+        //삭제 버튼
+        list_button.setAttribute('id', 'delete-button');
+        list_button.innerHTML = '❌';
+
+        list_div.appendChild(list_check);
         list_div.appendChild(list_input);
         list_div.appendChild(list_button);
+
+        count += 1;
+
         list.appendChild(list_div);
-        //const deleteButton = document.getElementById('delete-button');
 
         list_button.addEventListener('click', deleteItem);
+        list_check.addEventListener('click', checkItem);
         inputValue.value = '';
     }
 }
@@ -41,42 +48,20 @@ function updateItem() {
 
 }
 
+function checkItem(event) {
+    const checked = event.target.parentElement;
+    if (event.target.checked) {
+        checked.style.opacity = 0.4;
+        count -= 1;
+    } else {
+        checked.style.opacity = 1;
+        count += 1;
+    }
+
+}
+
 function deleteItem(event) {
     const delete_item = event.target.parentElement;
     delete_item.remove();
-    // 삭제 이벤트 발생 -> 삭제 아이콘 클릭 
+    count -= 1;
 }
-
-//remove 코드 가져온 것
-
-/*function remove(cnt) {
-    var li = document.getElementById('li'+cnt);
-    list.removeChild(li);
-}*/
-
-/*function addItem(e) {
-    const input = document.getElementById('input-value');
-    const value = input.value;
-
-    if (e.keyCode == 13) {
-
-        let list_ul = document.getElementById('list-item');
-        let list_input = document.createElement('li');
-        list_li.setAttribute('class', 'item');
-        list_li.innerHTML = value;
-        list_ul.appendChild(list_li);
-
-    }
-    /*    input.addEventListener("keypress", function (event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                document.getElementById("list-item").click();
-            }
-        });
-}
-
-let input_button = document.querySelector("#input-button");
-input_button.addEventListener("click", addItem);
-*/
-
-
