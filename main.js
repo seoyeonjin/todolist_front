@@ -30,6 +30,8 @@ function initItem(res) {
             const list_input = document.createElement('input');
             const list_div = document.createElement('div');
             const list_button = document.createElement('button');
+
+            list_div.setAttribute('class', 'items');
             //check box
             list_check.setAttribute('type', 'checkbox');
             list_check.setAttribute('id', 'check-input');
@@ -42,7 +44,8 @@ function initItem(res) {
             list_input.setAttribute('value', inputValue.value);
             //삭제 버튼
             list_button.setAttribute('id', 'delete-button');
-            list_button.innerHTML = '❌';
+            list_button.innerHTML = 'ㅡ';
+
             list_div.appendChild(list_check);
             list_div.appendChild(list_input);
             list_div.appendChild(list_button);
@@ -51,7 +54,7 @@ function initItem(res) {
             list.appendChild(list_div);
             list_button.addEventListener('click', deleteItem);
             list_check.addEventListener('click', checkItem);
-            list_input.addEventListener('keypress', updateItem);
+            list_input.addEventListener('click', updateItem, { once: true });
             inputValue.value = '';
         }
     }
@@ -64,6 +67,8 @@ function addItem() {
         const list_div = document.createElement('div');
         const list_button = document.createElement('button');
 
+        list_div.setAttribute('class', 'items');
+
         //check box
         list_check.setAttribute('type', 'checkbox');
         list_check.setAttribute('id', 'check-input');
@@ -75,7 +80,7 @@ function addItem() {
 
         //삭제 버튼
         list_button.setAttribute('id', 'delete-button');
-        list_button.innerHTML = '❌';
+        list_button.innerHTML = 'ㅡ';
 
         list_div.appendChild(list_check);
         list_div.appendChild(list_input);
@@ -95,24 +100,28 @@ function addItem() {
 
         list_button.addEventListener('click', deleteItem);
         list_check.addEventListener('click', checkItem);
-        list_input.addEventListener('click', updateItem);
+        list_input.addEventListener('click', updateItem, { once: true });
+
         inputValue.value = '';
     }
 }
 
 function updateItem(event) {
     original_name = event.target.value;
-
     event.target.addEventListener('keypress', (event) => {
-        if (event.code == "Enter") {
+        if (event.code == "Enter" && event.isComposing === false) {
             event.target.setAttribute('value', event.target.value);
-            //할일 수정
-            $.ajax({
-                method: "PUT",
-                url: "https://us-central1-pilot-todo.cloudfunctions.net/todo",
-                data: { "originalName": original_name, "changeName": event.target.value },
-            })
-            original_name = event.target.value;
+            value = event.target.value;
+            if (original_name != value) {
+                //할일 수정
+                $.ajax({
+                    method: "PUT",
+                    url: "https://us-central1-pilot-todo.cloudfunctions.net/todo",
+                    data: { "originalName": original_name, "changeName": event.target.value },
+                })
+                original_name = event.target.value;
+                console.log(original_name);
+            }
         }
     })
 }
