@@ -36,8 +36,11 @@ function initItem(res) {
             list_check.setAttribute('type', 'checkbox');
             list_check.setAttribute('id', 'check-input');
             if (res[key] == true) {
-                list_check.checked;
+                count -= 1;
+                list_check.checked = true;
+                list_div.style.opacity = 0.4;
             }
+            console.log(res[key]);
             //input 값
             list_input.setAttribute('id', 'item');
             list_input.setAttribute('name', 'name');
