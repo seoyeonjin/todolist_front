@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <title>todolist</title>
+</head>
+
+<body>
+    <div class="contents">
+        <h1 class="title">
+            Todo List
+        </h1>
+        <div class="current-info">
+            <div class="date">
+                <script>
+                    date = new Date().toLocaleDateString();
+                    document.write(date);
+                </script>
+            </div>
+            <div id="count" class="count"></div>
+        </div>
+        <div class="input-info" id="input-info">
+            <input type="text" placeholder="할 일을 입력해주세요." id="input-value">
+            <button id="input-button">+</button>
+        </div>
+        <div class="input-list" id="input-list">
+            <ul id="list" class="list">
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script src="main.js"></script>
+
+
+</html>
